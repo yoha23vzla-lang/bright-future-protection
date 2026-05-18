@@ -379,44 +379,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   box-shadow: var(--shadow-card);
   display: block;
 }
-.hero__photo-badge {
-  position: absolute;
-  bottom: -1.2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  background: linear-gradient(135deg, #0D1830, #152240);
-  border: 1px solid var(--gold-border);
-  border-radius: var(--r-full);
-  padding: .65rem 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  white-space: nowrap;
-  box-shadow: 0 8px 28px rgba(0,0,0,.5);
-}
-.hero__photo-badge-gem {
-  font-size: .4rem;
-  background: var(--grad-gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  flex-shrink: 0;
-}
-.hero__photo-badge strong {
-  display: block;
-  font-size: .72rem;
-  font-weight: 600;
-  color: var(--text-0);
-  line-height: 1.2;
-}
-.hero__photo-badge span {
-  display: block;
-  font-size: .58rem;
-  color: var(--gold-300);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
 .hero__badge {
   display: inline-flex;
   align-items: center;
@@ -1382,7 +1344,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .hero__actions { flex-direction: column; align-items: flex-start; }
   .hero__credentials { gap: 1rem; }
   .hero__cred-sep { display: none; }
-  .hero__photo-badge { display: none; }
 
   /* About */
   .about__split { grid-template-columns: 1fr; gap: 3rem; }
@@ -1529,15 +1490,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   text-align: center;
   font-style: italic;
   opacity: .75;
-}
-
-/* ── FLOAT BADGE ANIMATION ──────────────────────────────────────── */
-@keyframes float-badge {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(-6px); }
-}
-.hero__photo-badge {
-  animation: float-badge 5s ease-in-out infinite;
 }
 
 /* ── HERO PHOTO CTA CARD FLOAT ──────────────────────────────────── */
