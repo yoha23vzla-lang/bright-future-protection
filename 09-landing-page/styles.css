@@ -144,10 +144,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   align-items: center;
   gap: .5rem;
   font-family: var(--ff-sans);
-  font-size: .85rem;
+  font-size: .82rem;
   font-weight: 600;
-  letter-spacing: .04em;
-  padding: .875rem 2rem;
+  letter-spacing: .05em;
+  padding: .7rem 1.75rem;
   border-radius: var(--r-full);
   transition: all var(--t-base);
   cursor: pointer;
@@ -157,11 +157,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .btn--primary {
   background: var(--grad-gold);
   color: var(--bg-0);
-  box-shadow: 0 4px 22px rgba(201,164,85,.28);
+  box-shadow: 0 2px 12px rgba(201,164,85,.18);
 }
 .btn--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 36px rgba(201,164,85,.42);
+  box-shadow: 0 5px 22px rgba(201,164,85,.28);
 }
 .btn--ghost {
   background: transparent;
@@ -306,7 +306,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   inset: 0;
   background:
     radial-gradient(ellipse 65% 55% at 72% 40%, rgba(201,164,85,.10) 0%, transparent 62%),
-    radial-gradient(ellipse 45% 75% at 12% 62%, rgba(12,25,70,.65) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 75% at 12% 62%, rgba(12,25,70,.32) 0%, transparent 70%),
     linear-gradient(155deg, #050912 0%, #0C1528 42%, #091225 72%, #050912 100%);
 }
 .hero__grid-overlay {
@@ -327,16 +327,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 9rem var(--px) 7rem;
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 6rem;
+  align-items: start;
+  gap: 4.5rem;
 }
 .hero__content {
-  max-width: 680px;
+  max-width: 578px;
+  padding-top: 1rem;
 }
 .hero__photo-slot {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-shrink: 0;
 }
 .hero__photo-frame {
