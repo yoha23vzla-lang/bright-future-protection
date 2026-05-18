@@ -548,49 +548,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   pointer-events: none;
 }
 
-/* Floating credential card */
-.about__float-card {
-  position: absolute;
-  bottom: 2.5rem;
-  right: -2.25rem;
-  z-index: 3;
-  background: linear-gradient(145deg, #0D1830 0%, #152240 100%);
-  border: 1px solid var(--gold-border);
-  border-radius: var(--r-md);
-  padding: 1.25rem 1.5rem;
-  box-shadow: 0 16px 48px rgba(0,0,0,.65), 0 0 0 1px rgba(201,164,85,.06);
-  min-width: 230px;
-}
-.about__float-row {
-  display: flex;
-  align-items: flex-start;
-  gap: .7rem;
-}
-.about__float-gem {
-  font-size: .38rem;
-  color: var(--gold-300);
-  margin-top: .35rem;
-  flex-shrink: 0;
-}
-.about__float-row strong {
-  display: block;
-  font-size: .78rem;
-  font-weight: 600;
-  color: var(--text-0);
-  margin-bottom: .12rem;
-}
-.about__float-row span {
-  font-size: .65rem;
-  color: var(--text-2);
-  letter-spacing: .02em;
-}
-.about__float-divider {
-  width: 100%;
-  height: 1px;
-  background: var(--gold-border);
-  margin: .875rem 0;
-  opacity: .5;
-}
 
 /* Content column */
 .about__content {
@@ -1310,7 +1267,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .hero__photo-img   { width: 240px; height: 320px; }
   .hero__inner       { gap: 3rem; }
   .about__split      { gap: 4rem; }
-  .about__float-card { right: -1rem; min-width: 200px; }
   .about__cred-grid  { grid-template-columns: 1fr; }
 }
 
@@ -1348,7 +1304,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   /* About */
   .about__split { grid-template-columns: 1fr; gap: 3rem; }
   .about__photo-frame { aspect-ratio: 4/5; max-width: 340px; margin: 0 auto; }
-  .about__float-card { right: 0; bottom: 1.5rem; }
   .about__cred-grid { grid-template-columns: 1fr; gap: .85rem; }
 
   /* Services */
@@ -1492,14 +1447,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   opacity: .75;
 }
 
-/* ── HERO PHOTO CTA CARD FLOAT ──────────────────────────────────── */
-@keyframes float-card {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-5px); }
-}
-.about__float-card {
-  animation: float-card 6s ease-in-out infinite;
-}
 
 /* ── BTN SHIMMER ────────────────────────────────────────────────── */
 .btn--primary {
