@@ -1521,9 +1521,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: relative;
   width: 100%;
   max-width: 430px;
-  background: #fff;
   border-radius: 18px;
-  overflow: hidden;
+  overflow: visible; /* lets close button sit above the rounded corners without clipping */
   box-shadow: 0 32px 80px rgba(0, 0, 0, .45), 0 0 0 1px rgba(201, 164, 85, .18);
   transform: translateY(24px) scale(.97);
   transition: transform .35s cubic-bezier(.22,.68,0,1.2);
@@ -1532,24 +1531,34 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transform: translateY(0) scale(1);
 }
 
+/* inner wrapper clips content to the rounded shape */
+.popup-inner {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+}
+
 .popup-close {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 10;
-  width: 28px;
-  height: 28px;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, .15);
-  border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(255, 255, 255, .18);
+  border: 1px solid rgba(255, 255, 255, .3);
   border-radius: 50%;
   color: #fff;
   cursor: pointer;
-  transition: background .2s;
+  transition: background .25s, transform .2s;
 }
-.popup-close:hover { background: rgba(255, 255, 255, .28); }
+.popup-close:hover {
+  background: rgba(255, 255, 255, .32);
+  transform: scale(1.1);
+}
 
 .popup-header {
   background: var(--navy-900, #050912);
@@ -1622,7 +1631,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* Mobile adjustments */
 @media (max-width: 480px) {
-  .popup-modal { border-radius: 14px; }
+  .popup-modal  { border-radius: 14px; }
+  .popup-inner  { border-radius: 14px; }
   .popup-header { padding: 1.75rem 1.5rem 1.5rem; }
   .popup-headline { font-size: 1.45rem; }
 }
