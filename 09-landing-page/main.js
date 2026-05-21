@@ -145,8 +145,8 @@ if (heroBg && window.matchMedia('(min-width: 768px)').matches) {
     overlay.setAttribute('aria-hidden', 'true');
   }
 
-  // Timer trigger — 3s for testing (change to 20000 for production)
-  const timerID = setTimeout(openPopup, 3000);
+  // 20-second timer trigger
+  const timerID = setTimeout(openPopup, 20000);
 
   // 40% scroll trigger
   function scrollHandler() {
