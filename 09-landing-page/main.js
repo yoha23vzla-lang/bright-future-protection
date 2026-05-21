@@ -145,13 +145,13 @@ if (heroBg && window.matchMedia('(min-width: 768px)').matches) {
     overlay.setAttribute('aria-hidden', 'true');
   }
 
-  // 20-second timer trigger
-  const timerID = setTimeout(openPopup, 20000);
+  // 12-second timer trigger
+  const timerID = setTimeout(openPopup, 12000);
 
-  // 40% scroll trigger
+  // 30% scroll trigger
   function scrollHandler() {
     const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-    if (pct >= 0.4) openPopup();
+    if (pct >= 0.3) openPopup();
   }
   window.addEventListener('scroll', scrollHandler, { passive: true });
 
