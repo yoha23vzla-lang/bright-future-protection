@@ -120,20 +120,26 @@ if (heroBg && window.matchMedia('(min-width: 768px)').matches) {
 
 // ── PREMIUM POPUP ────────────────────────────────────────────────
 (function () {
-  const SUBMITTED_KEY = 'bfp_popup_submitted';
-  if (sessionStorage.getItem(SUBMITTED_KEY)) return;
+  const LS_SUBMITTED   = 'bfp_popup_submitted'; // localStorage  — permanent across sessions
+  const SS_CLOSE_COUNT = 'bfp_popup_closes';    // sessionStorage — resets per tab
+
+  // Permanently suppressed after form submission
+  if (localStorage.getItem(LS_SUBMITTED)) return;
 
   const overlay  = document.getElementById('ghlPopup');
   const closeBtn = document.getElementById('popupClose');
   if (!overlay) return;
 
-  let initialTimer, reshowTimer;
+  let initialTimer, reshowTimer, scrollActive = true;
 
   function openPopup() {
-    if (sessionStorage.getItem(SUBMITTED_KEY)) return;
+    if (localStorage.getItem(LS_SUBMITTED)) return;
     if (overlay.classList.contains('is-open')) return;
     clearTimeout(initialTimer);
-    window.removeEventListener('scroll', scrollHandler, { passive: true });
+    if (scrollActive) {
+      window.removeEventListener('scroll', scrollHandler, { passive: true });
+      scrollActive = false;
+    }
     overlay.classList.add('is-open');
     overlay.setAttribute('aria-hidden', 'false');
     closeBtn && closeBtn.focus();
@@ -142,14 +148,21 @@ if (heroBg && window.matchMedia('(min-width: 768px)').matches) {
   function closePopup() {
     overlay.classList.remove('is-open');
     overlay.setAttribute('aria-hidden', 'true');
-    // Re-show after 2 minutes if form was not submitted
-    if (!sessionStorage.getItem(SUBMITTED_KEY)) {
-      reshowTimer = setTimeout(openPopup, 120000);
+    if (localStorage.getItem(LS_SUBMITTED)) return;
+
+    const closes = parseInt(sessionStorage.getItem(SS_CLOSE_COUNT) || '0', 10);
+    sessionStorage.setItem(SS_CLOSE_COUNT, closes + 1);
+
+    if (closes === 0) {
+      // First close → one retry after 5 minutes
+      reshowTimer = setTimeout(openPopup, 300000);
     }
+    // Second close (closes === 1) → session silenced, no further re-shows
   }
 
   function markSubmitted() {
-    sessionStorage.setItem(SUBMITTED_KEY, '1');
+    localStorage.setItem(LS_SUBMITTED, '1');
+    clearTimeout(initialTimer);
     clearTimeout(reshowTimer);
     overlay.classList.remove('is-open');
     overlay.setAttribute('aria-hidden', 'true');
@@ -158,14 +171,14 @@ if (heroBg && window.matchMedia('(min-width: 768px)').matches) {
   // 8-second initial trigger
   initialTimer = setTimeout(openPopup, 8000);
 
-  // 20% scroll trigger
+  // 25% scroll trigger
   function scrollHandler() {
-    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-    if (pct >= 0.2) openPopup();
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    if (total > 0 && window.scrollY / total >= 0.25) openPopup();
   }
   window.addEventListener('scroll', scrollHandler, { passive: true });
 
-  // Close handlers
+  // Close handlers — button, backdrop click, Escape key
   closeBtn && closeBtn.addEventListener('click', closePopup);
   overlay.addEventListener('click', e => { if (e.target === overlay) closePopup(); });
   document.addEventListener('keydown', e => {
