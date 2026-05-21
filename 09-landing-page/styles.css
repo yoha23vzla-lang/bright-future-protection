@@ -1606,7 +1606,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: block;
   width: 100%;
   border: none;
-  min-height: 320px;
+  min-height: 436px;
 }
 
 .popup-legal {
