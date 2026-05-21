@@ -1494,7 +1494,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 /* ================================================================
-   PREMIUM POPUP — GOHIGHLEVEL
+   POPUP — GOHIGHLEVEL
    ================================================================ */
 
 .popup-overlay {
@@ -1505,12 +1505,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(5, 9, 18, 0.72);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(5, 9, 18, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity .35s ease, visibility .35s ease;
+  transition: opacity .3s ease, visibility .3s ease;
 }
 .popup-overlay.is-open {
   opacity: 1;
@@ -1520,96 +1520,42 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .popup-modal {
   position: relative;
   width: 100%;
-  max-width: 430px;
-  border-radius: 18px;
-  overflow: visible; /* lets close button sit above the rounded corners without clipping */
-  box-shadow: 0 32px 80px rgba(0, 0, 0, .45), 0 0 0 1px rgba(201, 164, 85, .18);
-  transform: translateY(24px) scale(.97);
+  max-width: 520px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, .18), 0 0 0 1px rgba(0, 0, 0, .06);
+  transform: translateY(20px) scale(.98);
   transition: transform .35s cubic-bezier(.22,.68,0,1.2);
 }
 .popup-overlay.is-open .popup-modal {
   transform: translateY(0) scale(1);
 }
 
-/* inner wrapper clips content to the rounded shape */
-.popup-inner {
-  border-radius: 18px;
-  overflow: hidden;
-  background: #fff;
-}
-
 .popup-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 12px;
+  right: 12px;
   z-index: 100;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, .18);
-  border: 1px solid rgba(255, 255, 255, .3);
+  background: rgba(0, 0, 0, .06);
+  border: 1px solid rgba(0, 0, 0, .1);
   border-radius: 50%;
-  color: #fff;
+  color: #555;
   cursor: pointer;
-  transition: background .25s, transform .2s;
+  transition: background .2s, transform .2s;
 }
 .popup-close:hover {
-  background: rgba(255, 255, 255, .32);
+  background: rgba(0, 0, 0, .12);
   transform: scale(1.1);
 }
 
-.popup-header {
-  background: var(--navy-900, #050912);
-  padding: 2.25rem 2rem 1.75rem;
-  text-align: center;
-}
-
-.popup-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: .45rem;
-  background: rgba(201, 164, 85, .14);
-  border: 1px solid rgba(201, 164, 85, .35);
-  border-radius: 100px;
-  color: var(--gold-300, #c9a455);
-  font-family: var(--ff-sans);
-  font-size: .7rem;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  padding: .35rem .9rem;
-  margin-bottom: 1.15rem;
-}
-
-.popup-headline {
-  font-family: var(--ff-serif);
-  font-size: clamp(1.55rem, 4vw, 2rem);
-  font-weight: 700;
-  line-height: 1.15;
-  color: #fff;
-  margin: 0 0 .85rem;
-}
-.popup-headline em {
-  font-style: normal;
-  background: linear-gradient(135deg, var(--gold-200, #e8c97a) 0%, var(--gold-400, #b8923a) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.popup-sub {
-  font-family: var(--ff-sans);
-  font-size: .88rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, .65);
-  margin: 0;
-}
-
 .popup-form-wrap {
-  padding: 0;
-  background: #fff;
+  display: block;
 }
 .popup-form-wrap iframe {
   display: block;
@@ -1618,21 +1564,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   min-height: 436px;
 }
 
-.popup-legal {
-  font-family: var(--ff-sans);
-  font-size: .72rem;
-  color: #9aa3b4;
-  text-align: center;
-  padding: .85rem 1.5rem 1.25rem;
-  margin: 0;
-  border-top: 1px solid #f0f2f6;
-  background: #fff;
-}
-
 /* Mobile adjustments */
 @media (max-width: 480px) {
-  .popup-modal  { border-radius: 14px; }
-  .popup-inner  { border-radius: 14px; }
-  .popup-header { padding: 1.75rem 1.5rem 1.5rem; }
-  .popup-headline { font-size: 1.45rem; }
+  .popup-modal { border-radius: 12px; }
+  .popup-overlay { padding: .75rem; }
 }
