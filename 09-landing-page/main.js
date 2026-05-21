@@ -120,51 +120,67 @@ if (heroBg && window.matchMedia('(min-width: 768px)').matches) {
 
 // ── PREMIUM POPUP ────────────────────────────────────────────────
 (function () {
-  const STORAGE_KEY = 'bfp_popup_seen';
-  if (sessionStorage.getItem(STORAGE_KEY)) return;
+  const SUBMITTED_KEY = 'bfp_popup_submitted';
+  if (sessionStorage.getItem(SUBMITTED_KEY)) return;
 
-  const overlay   = document.getElementById('ghlPopup');
-  const closeBtn  = document.getElementById('popupClose');
+  const overlay  = document.getElementById('ghlPopup');
+  const closeBtn = document.getElementById('popupClose');
   if (!overlay) return;
 
-  let opened = false;
+  let initialTimer, reshowTimer;
 
   function openPopup() {
-    if (opened) return;
-    opened = true;
-    sessionStorage.setItem(STORAGE_KEY, '1');
+    if (sessionStorage.getItem(SUBMITTED_KEY)) return;
+    if (overlay.classList.contains('is-open')) return;
+    clearTimeout(initialTimer);
+    window.removeEventListener('scroll', scrollHandler, { passive: true });
     overlay.classList.add('is-open');
     overlay.setAttribute('aria-hidden', 'false');
     closeBtn && closeBtn.focus();
-    clearTimeout(timerID);
-    window.removeEventListener('scroll', scrollHandler, { passive: true });
   }
 
   function closePopup() {
     overlay.classList.remove('is-open');
     overlay.setAttribute('aria-hidden', 'true');
+    // Re-show after 2 minutes if form was not submitted
+    if (!sessionStorage.getItem(SUBMITTED_KEY)) {
+      reshowTimer = setTimeout(openPopup, 120000);
+    }
   }
 
-  // 12-second timer trigger
-  const timerID = setTimeout(openPopup, 12000);
+  function markSubmitted() {
+    sessionStorage.setItem(SUBMITTED_KEY, '1');
+    clearTimeout(reshowTimer);
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
 
-  // 30% scroll trigger
+  // 8-second initial trigger
+  initialTimer = setTimeout(openPopup, 8000);
+
+  // 20% scroll trigger
   function scrollHandler() {
     const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-    if (pct >= 0.3) openPopup();
+    if (pct >= 0.2) openPopup();
   }
   window.addEventListener('scroll', scrollHandler, { passive: true });
 
-  // Close button
+  // Close handlers
   closeBtn && closeBtn.addEventListener('click', closePopup);
-
-  // Click outside modal
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) closePopup();
-  });
-
-  // Escape key
+  overlay.addEventListener('click', e => { if (e.target === overlay) closePopup(); });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && overlay.classList.contains('is-open')) closePopup();
+  });
+
+  // Detect GHL form submission via iframe postMessage
+  window.addEventListener('message', e => {
+    if (!e.data) return;
+    try {
+      const d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+      if (d.type === 'form-submitted' || d.event === 'form_submitted' ||
+          d.action === 'submit' || d.formSubmitted) {
+        markSubmitted();
+      }
+    } catch (_) {}
   });
 }());
