@@ -1492,3 +1492,137 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 768px) {
   .testimonials__grid { grid-template-columns: 1fr; }
 }
+
+/* ================================================================
+   PREMIUM POPUP — GOHIGHLEVEL
+   ================================================================ */
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(5, 9, 18, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s ease, visibility .35s ease;
+}
+.popup-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-modal {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, .45), 0 0 0 1px rgba(201, 164, 85, .18);
+  transform: translateY(24px) scale(.97);
+  transition: transform .35s cubic-bezier(.22,.68,0,1.2);
+}
+.popup-overlay.is-open .popup-modal {
+  transform: translateY(0) scale(1);
+}
+
+.popup-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, .15);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s;
+}
+.popup-close:hover { background: rgba(255, 255, 255, .28); }
+
+.popup-header {
+  background: var(--navy-900, #050912);
+  padding: 2.25rem 2rem 1.75rem;
+  text-align: center;
+}
+
+.popup-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  background: rgba(201, 164, 85, .14);
+  border: 1px solid rgba(201, 164, 85, .35);
+  border-radius: 100px;
+  color: var(--gold-300, #c9a455);
+  font-family: var(--ff-sans);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .35rem .9rem;
+  margin-bottom: 1.15rem;
+}
+
+.popup-headline {
+  font-family: var(--ff-serif);
+  font-size: clamp(1.55rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  margin: 0 0 .85rem;
+}
+.popup-headline em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--gold-200, #e8c97a) 0%, var(--gold-400, #b8923a) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.popup-sub {
+  font-family: var(--ff-sans);
+  font-size: .88rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .65);
+  margin: 0;
+}
+
+.popup-form-wrap {
+  padding: 0;
+  background: #fff;
+}
+.popup-form-wrap iframe {
+  display: block;
+  width: 100%;
+  border: none;
+  min-height: 320px;
+}
+
+.popup-legal {
+  font-family: var(--ff-sans);
+  font-size: .72rem;
+  color: #9aa3b4;
+  text-align: center;
+  padding: .85rem 1.5rem 1.25rem;
+  margin: 0;
+  border-top: 1px solid #f0f2f6;
+  background: #fff;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .popup-modal { border-radius: 14px; }
+  .popup-header { padding: 1.75rem 1.5rem 1.5rem; }
+  .popup-headline { font-size: 1.45rem; }
+}

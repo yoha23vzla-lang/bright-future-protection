@@ -620,25 +620,50 @@
 
   <script src="main.js"></script>
 
-  <!-- ═══ GOHIGHLEVEL POPUP FORM ═══════════════════════════════ -->
-  <iframe
-    src="https://links.aibuilderx.io/widget/form/FhOtbnAIyJ6i5zEJ7TtZ"
-    style="display:none;width:100%;height:100%;border:none;border-radius:8px"
-    id="popup-FhOtbnAIyJ6i5zEJ7TtZ"
-    data-layout="{'id':'POPUP'}"
-    data-trigger-type="showAfter"
-    data-trigger-value="8"
-    data-activation-type="alwaysActivated"
-    data-activation-value=""
-    data-deactivation-type="leadCollected"
-    data-deactivation-value=""
-    data-form-name="Form 1"
-    data-height="400"
-    data-layout-iframe-id="popup-FhOtbnAIyJ6i5zEJ7TtZ"
-    data-form-id="FhOtbnAIyJ6i5zEJ7TtZ"
-    title="Form 1"
-    data-modal-height="400">
-  </iframe>
+  <!-- ═══ PREMIUM POPUP — GOHIGHLEVEL ════════════════════════ -->
+  <div class="popup-overlay" id="ghlPopup" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="popup-modal">
+
+      <button class="popup-close" id="popupClose" aria-label="Close">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div class="popup-header">
+        <div class="popup-badge">
+          <span aria-hidden="true">◆</span>
+          Free Consultation · Georgia &amp; Florida
+        </div>
+        <h2 class="popup-headline">
+          Protect Your Family &amp;<br>
+          <em>Secure Your Legacy</em>
+        </h2>
+        <p class="popup-sub">
+          Get a free personalized consultation for family protection,
+          tax-free retirement strategies, and legacy planning.
+        </p>
+      </div>
+
+      <div class="popup-form-wrap">
+        <iframe
+          src="https://links.aibuilderx.io/widget/form/FhOtbnAIyJ6i5zEJ7TtZ"
+          style="display:block;width:100%;border:none;"
+          id="inline-FhOtbnAIyJ6i5zEJ7TtZ"
+          data-layout="{'id':'INLINE'}"
+          data-form-name="Form 1"
+          data-height="390"
+          data-form-id="FhOtbnAIyJ6i5zEJ7TtZ"
+          title="Book My Free Consultation">
+        </iframe>
+      </div>
+
+      <p class="popup-legal">
+        No commitment required &nbsp;·&nbsp; Licensed in Georgia &amp; Florida
+      </p>
+
+    </div>
+  </div>
   <script src="https://links.aibuilderx.io/js/form_embed.js"></script>
 
 </body>

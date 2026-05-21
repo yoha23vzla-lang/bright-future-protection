@@ -117,3 +117,54 @@ if (heroBg && window.matchMedia('(min-width: 768px)').matches) {
     }
   }, { passive: true });
 }
+
+// ── PREMIUM POPUP ────────────────────────────────────────────────
+(function () {
+  const STORAGE_KEY = 'bfp_popup_seen';
+  if (sessionStorage.getItem(STORAGE_KEY)) return;
+
+  const overlay   = document.getElementById('ghlPopup');
+  const closeBtn  = document.getElementById('popupClose');
+  if (!overlay) return;
+
+  let opened = false;
+
+  function openPopup() {
+    if (opened) return;
+    opened = true;
+    sessionStorage.setItem(STORAGE_KEY, '1');
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    closeBtn && closeBtn.focus();
+    clearTimeout(timerID);
+    window.removeEventListener('scroll', scrollHandler, { passive: true });
+  }
+
+  function closePopup() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  // 20-second timer trigger
+  const timerID = setTimeout(openPopup, 20000);
+
+  // 40% scroll trigger
+  function scrollHandler() {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    if (pct >= 0.4) openPopup();
+  }
+  window.addEventListener('scroll', scrollHandler, { passive: true });
+
+  // Close button
+  closeBtn && closeBtn.addEventListener('click', closePopup);
+
+  // Click outside modal
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closePopup();
+  });
+
+  // Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closePopup();
+  });
+}());
